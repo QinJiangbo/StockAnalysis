@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+ 	<constant name="struts.devMode" value="false" />
+ 	<package name="kchart" namespace="/kchart" extends="struts-default">
+        <action name="*" class="com.whu.action.KChartAction" method="{1}">
+            <result name="success">
+                /index.jsp
+            </result>
+        </action>
+    </package>
+    <package name="image" namespace="/data/image" extends="struts-default">
+        <action name="*-*" class="com.whu.action.ImageAction" method="image">
+            <param name="name">{1}</param>
+            <param name="type">{2}</param>
+            <result name="success" type="stream">
+                <param name="contentType">image/jpeg</param>
+                <param name="inputName">imageStream</param>
+            </result>
+        </action>
+    </package>
+</struts>
