@@ -42,10 +42,10 @@
 </div>
 <div class="compare">
 
-	<div class="displayChart inline" id="KChartTarget">
+	<div class="displayChart inline" id="KChartTarget2">
 		<p class="greyColor">K线图</p>
 	</div>
-	<div class="displayChart inline" id="amountTarget">
+	<div class="displayChart inline" id="amountTarget2">
 		<p class="greyColor">成交量 </p>
 	</div>
 </div>

@@ -27,7 +27,7 @@ input.inline, .inline {
 .selectFileDiv {
     position: absolute;
     top: 5px;
-    left: 50px;
+    padding-left: 50px;
     width: 1260px;
     height: 30px;
 
@@ -54,18 +54,20 @@ input.inline, .inline {
     border: 1px solid #ccc;
 }
 
-#KChartTarget {
+#KChartTarget,
+#KChartTarget2 {
     left: 5px;
 }
 
-#amountTarget {
+#amountTarget,
+#amountTarget2 {
     right: 5px;
 }
 
 .selectButton {
     position: absolute;
     top: 300px;
-    width: 1280px;
+    width: 1260px;
     height: 200px;
     left: 10px;
 }
