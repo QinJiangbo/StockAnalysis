@@ -24,7 +24,6 @@ public class ImageAction extends ActionSupport{
      */
     public String image() {
         String imagePath = ServerConstants.KCHART_IMAGES + name + ".txt-" + type + ".jpg";
-        System.out.println(imagePath);
         File file = new File(imagePath);
         try {
             imageStream = new FileInputStream(file);
