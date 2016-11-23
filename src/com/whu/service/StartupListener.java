@@ -44,13 +44,13 @@ public class StartupListener implements ServletContextListener {
         String KCHART_IMAGES = properties.getProperty("KCHART_IMAGES");
         String KCHART_COMPRESSED_IMAGES = properties.getProperty("KCHART_COMPRESSED_IMAGES");
         // 设置服务器属性值
-        if(STOCK_DATA != null && STOCK_DATA != "") {
+        if(STOCK_DATA != null && STOCK_DATA.equals("")) {
             ServerConstants.STOCK_DATA = STOCK_DATA;
         }
-        if(KCHART_IMAGES != null && KCHART_IMAGES != "") {
+        if(KCHART_IMAGES != null && KCHART_IMAGES.equals("")) {
             ServerConstants.KCHART_IMAGES = KCHART_IMAGES;
         }
-        if(KCHART_COMPRESSED_IMAGES != null && KCHART_COMPRESSED_IMAGES != "") {
+        if(KCHART_COMPRESSED_IMAGES != null && KCHART_COMPRESSED_IMAGES.equals("")) {
             ServerConstants.KCHART_COMPRESSED_IMAGES = KCHART_COMPRESSED_IMAGES;
         }
     }
