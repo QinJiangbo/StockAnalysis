@@ -1,0 +1,94 @@
+input.inline, .inline {
+    display: inline;
+}
+
+.form-control {
+    display: inline;
+    width: 150px;
+    height: 30px;
+}
+
+.leftFloat {
+    float: left;
+}
+
+.rightFloat {
+    float: right;
+}
+
+.greyColor {
+    color: grey;
+}
+
+.fontColor {
+    color: #666;
+}
+
+.selectFileDiv {
+    position: absolute;
+    top: 5px;
+    left: 50px;
+    width: 1260px;
+    height: 30px;
+
+}
+
+.target {
+    position: absolute;
+    top: 40px;
+    width: 1260px;
+    height: 250px;
+}
+
+.compare {
+    position: absolute;
+    top: 340px;
+    width: 1260px;
+    height: 250px;
+}
+
+.displayChart {
+    position: absolute;
+    width: 620px;
+    height: 250px;
+    border: 1px solid #ccc;
+}
+
+#KChartTarget {
+    left: 5px;
+}
+
+#amountTarget {
+    right: 5px;
+}
+
+.selectButton {
+    position: absolute;
+    top: 300px;
+    width: 1280px;
+    height: 200px;
+    left: 10px;
+}
+
+.margin-right {
+    margin-right: 30px;
+}
+
+.numberInput {
+    width: 70px;
+    height: 25px;
+}
+
+.selectButton .radio {
+    margin-top: 0;
+}
+
+.selectButton .radio label {
+    padding-left: 5px;
+}
+
+.mybtn {
+    height: 30px;
+    width: 70px;
+    text-align: center;
+}
