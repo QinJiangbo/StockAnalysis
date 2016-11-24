@@ -5,8 +5,7 @@ import com.whu.entity.ParamWeight;
 import com.whu.entity.ResultEntity;
 import com.whu.util.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Date: 20/11/2016
@@ -64,7 +63,7 @@ public class KChartService {
     }
 
     /**
-     * 通过算法综合比较图片相似度
+     * 通过一个算法综合比较图片相似度
      * @param sourceImage 源图片
      * @return
      */
@@ -87,21 +86,57 @@ public class KChartService {
         return resultEntity;
     }
 
-    public static void main(String[] args) {
-        long start = System.currentTimeMillis();
-        ResultEntity resultEntity = mixSimilarityComparation("SZ300122.txt", Algorithms.MULTIPHASH);
-        if(resultEntity != null) {
-            resultEntity.sort();
-            int tag = resultEntity.getRank()[0].getTag();
-            System.out.println(resultEntity.getRank()[0].getSimilarity());
-            System.out.println(tag-1);
-            System.out.println(resultEntity.getPath()[tag-1]);
-            long end = System.currentTimeMillis();
-            System.out.println("Time Consumed: " + (end - start) / 1000 + "s");
-            System.out.println("Comparision Completed!");
-        }else{
-            System.out.println("The source image name is wrong!");
+    /**
+     * 多个算法间取综合
+     *
+     * @param sourceImage
+     * @param map
+     * @return
+     */
+    public static ResultEntity multiMixSimilarityComparation(String sourceImage, Map<Algorithms, Double> map) {
+        List<ResultEntity> resultEntities = new ArrayList<>();
+        List<Double> weights = new ArrayList<>();
+
+        Set<Map.Entry<Algorithms, Double>> entrySet = map.entrySet();
+        for (Map.Entry<Algorithms, Double> entry : entrySet) {
+            resultEntities.add(mixSimilarityComparation(sourceImage, entry.getKey()));
+            weights.add(entry.getValue());
         }
 
+        int size = resultEntities.get(0).getSize();
+        ResultEntity resultEntity = new ResultEntity(size);
+        resultEntity.setPath(resultEntities.get(0).getPath());
+        double[] similarity = new double[size];
+        for (int i = 0; i < resultEntities.size(); i++) {
+            for (int j = 0; j < size; j++) {
+                similarity[j] += resultEntities.get(i).getSimilarity()[j] * weights.get(i);
+            }
+        }
+        resultEntity.setSimilarity(similarity);
+        return resultEntity;
+    }
+
+    public static void main(String[] args) {
+//        long start = System.currentTimeMillis();
+//        ResultEntity resultEntity = mixSimilarityComparation("SZ300122.txt", Algorithms.MULTIPHASH);
+//        if(resultEntity != null) {
+//            int tag = resultEntity.getRank()[0].getTag();
+//            System.out.println(resultEntity.getRank()[0].getSimilarity());
+//            System.out.println(tag-1);
+//            System.out.println(resultEntity.getPath()[tag-1]);
+//            long end = System.currentTimeMillis();
+//            System.out.println("Time Consumed: " + (end - start) / 1000 + "s");
+//            System.out.println("Comparision Completed!");
+//        }else{
+//            System.out.println("The source image name is wrong!");
+//        }
+        Map<Algorithms, Double> map = new HashMap<>();
+        map.put(Algorithms.MULTIPHASH, 1.0);
+        ResultEntity resultEntity = multiMixSimilarityComparation("SZ300122.txt", map);
+        resultEntity.sort();
+        int tag = resultEntity.getRank()[0].getTag();
+        System.out.println(resultEntity.getRank()[0].getSimilarity());
+        System.out.println(tag - 1);
+        System.out.println(resultEntity.getPath()[tag-1]);
     }
 }

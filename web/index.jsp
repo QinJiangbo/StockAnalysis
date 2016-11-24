@@ -29,13 +29,16 @@
 </div>
 <div class="selectButton">
     <label class="fontColor">PHash算法权重：</label>
-	<input type="number" value="1" class="arith1 numberInput form-control margin-right" step="0.1" min="0" max="1">
+    <input type="number" id="pHash" value="1" class="arith1 numberInput form-control margin-right" step="0.1" min="0"
+           max="1">
     <label class="fontColor">LevenShtein算法权重：</label>
-	<input type="number" value="0" class="arith2 numberInput form-control margin-right" step="0.1" min="0" max="1">
+    <input type="number" id="levenShtein" value="0" class="arith2 numberInput form-control margin-right" step="0.1"
+           min="0" max="1">
     <label class="fontColor">Sift算法权重：</label>
-	<input type="number" value="0" class="arith3 numberInput form-control margin-right" step="0.1" min="0" max="1">
+    <input type="number" id="sift" value="0" class="arith3 numberInput form-control margin-right" step="0.1" min="0"
+           max="1">
 	<label class="fontColor">K线权重：</label>
-	<input type="number" value="0.5" class="numberInput form-control margin-right" step="0.1" min="0" max="1">
+    <input type="number" id="k" value="0.5" class="numberInput form-control margin-right" step="0.1" min="0" max="1">
 	<button type="button" onclick="calculate()" class="mybtn btn btn-default btn-sm margin-right">计算</button>
 </div>
 <div class="compare">

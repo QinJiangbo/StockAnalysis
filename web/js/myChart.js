@@ -33,6 +33,30 @@ function calculate() {
         alert("三个算法权重之和不能大于1");
         return;
     }
+
+    // 参数
+    var params = {
+        sourceNo: $("#selectFile").val(),
+        pHashWeight: $("#pHash").val(),
+        levenWeight: $("#levenShtein").val(),
+        siftWeight: $("#sift").val(),
+        kWeight: $("#k").val()
+    };
+
+    console.log(params);
+
+    $.ajax({
+        type: "POST",
+        url: "ajax/compare.ajax",
+        data: params,
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (data) {
+            console.log("data=" + data);
+        }
+    });
 }
 
 /**
