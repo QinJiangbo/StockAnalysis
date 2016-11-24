@@ -48,20 +48,20 @@ input.inline, .inline {
 }
 
 .displayChart {
-    position: absolute;
-    width: 620px;
+    width: 310px;
     height: 250px;
     border: 1px solid #ccc;
 }
 
 #KChartTarget,
 #KChartTarget2 {
-    left: 5px;
+    float: left;
 }
 
 #amountTarget,
 #amountTarget2 {
-    right: 5px;
+    float: left;
+    margin-left: 50px;
 }
 
 .selectButton {
@@ -93,4 +93,11 @@ input.inline, .inline {
     height: 30px;
     width: 70px;
     text-align: center;
+}
+
+.import-btn {
+    height: 30px;
+    width: 100px;
+    text-align: center;
+    margin-right: 30px;
 }
