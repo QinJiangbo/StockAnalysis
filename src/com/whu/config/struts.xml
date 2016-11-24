@@ -22,9 +22,4 @@
             <result name="success" type="json"/>
         </action>
     </package>
-    <package name="test" namespace="/test" extends="json-default">
-        <action name="helloAjax" class="com.whu.action.DemoAction" method="test">
-            <result name="success" type="json"/>
-        </action>
-    </package>
 </struts>

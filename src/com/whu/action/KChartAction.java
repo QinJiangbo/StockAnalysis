@@ -119,11 +119,11 @@ public class KChartAction extends ActionSupport{
         this.targetNo = targetNo;
     }
 
-    public double getpHashWeight() {
+    public double getPHashWeight() {
         return pHashWeight;
     }
 
-    public void setpHashWeight(double pHashWeight) {
+    public void setPHashWeight(double pHashWeight) {
         this.pHashWeight = pHashWeight;
     }
 
