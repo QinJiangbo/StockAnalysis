@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class ImageUtil {
 
     private static List<Thread> genThreadList = new ArrayList<>();
-    private static List<Thread> comThreadList = new ArrayList<>();
 
     /**
      * Éú³ÉÍ¼Æ¬
@@ -47,14 +46,6 @@ public class ImageUtil {
             }
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-        long start = System.currentTimeMillis();
-        ImageUtil.compress();
-        long end = System.currentTimeMillis();
-        System.out.println("Time Consumed: " + (end - start) / 1000 + "s");
-        System.out.println("Compressed Completed!");
     }
 
 }

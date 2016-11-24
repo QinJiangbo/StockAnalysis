@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/com/whu/action/HomeAction.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/levenshtein/HashCodeDiff.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/levenshtein/ImageRead.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/levenshtein/LevenShtein.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/opick/DPLine.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/opick/Test.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/opick/WangRead.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/phash/ImagePHash.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/phash/MultiPHash.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/sift/FeaturePoint.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/sift/GaussTemplate.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/sift/GrayTransformer.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/sift/ImageProcessor.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/sift/ImageTransform.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/sift/ImageTransformer.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/entity/ResultEntity.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/kchart/KChart.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/kchart/KData.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/whu/service/HomeService.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/test/ChartTest.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/test/SIFTTest.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/util/FileNameUtil.java" charset="GBK" />

@@ -17,7 +17,7 @@ public class GrayTransformer {
      */
     public BufferedImage compute(String sourcePath) {
         BufferedImage sourceImage = grayTransform(sourcePath);
-        HashMap<Integer, double[][]> result = ImageTransform.getGaussPyramid(
+        HashMap<Integer, double[][]> result = ImageTransformer.getGaussPyramid(
                 ImageProcessor.imageToDoubleArray(sourceImage), 20, 3, 1.6);
         return ImageProcessor.doubleArrayToGreyImage(result.get(8));
     }

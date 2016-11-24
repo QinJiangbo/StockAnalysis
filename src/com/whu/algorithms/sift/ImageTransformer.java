@@ -16,7 +16,7 @@ import java.util.Set;
  *
  * @author Administrator
  */
-public class ImageTransform {
+public class ImageTransformer {
 
 
     /**
@@ -977,16 +977,16 @@ public class ImageTransform {
 
         double start = System.currentTimeMillis();
         ///生成高斯金字塔
-        HashMap<Integer, double[][]> result = ImageTransform.getGaussPyramid(ImageProcessor.imageToDoubleArray(img), 20, 3, 1.6);
+        HashMap<Integer, double[][]> result = ImageTransformer.getGaussPyramid(ImageProcessor.imageToDoubleArray(img), 20, 3, 1.6);
         double end = System.currentTimeMillis();
         System.out.println("高斯金字塔费时：" + (end - start));
 
         //生成dog金字塔
-        HashMap<Integer, double[][]> dog = ImageTransform.gaussToDog(result, 6);
+        HashMap<Integer, double[][]> dog = ImageTransformer.gaussToDog(result, 6);
         //初步获取特征点
-        HashMap<Integer, List<FeaturePoint>> keyPoints = ImageTransform.getRoughKeyPoint(dog, 6);
+        HashMap<Integer, List<FeaturePoint>> keyPoints = ImageTransformer.getRoughKeyPoint(dog, 6);
         ///特征点过滤
-        keyPoints = ImageTransform.filterPoints(dog, keyPoints, 10, 0.03);
+        keyPoints = ImageTransformer.filterPoints(dog, keyPoints, 10, 0.03);
 
         List<FeaturePoint> vctors = getVectors(result, keyPoints);
 
