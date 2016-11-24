@@ -18,6 +18,7 @@
           <fileset id="s2fileset2" name="My Fileset " removed="false">
             <file>jar://$MODULE_DIR$/lib/struts2-core-2.1.8.1.jar!/struts-default.xml</file>
             <file>file://$MODULE_DIR$/src/com/whu/config/struts.xml</file>
+            <file>jar://$MODULE_DIR$/lib/struts2-json-plugin-2.1.8.1.jar!/struts-plugin.xml</file>
           </fileset>
           <propertiesKeys disabled="false" />
         </configuration>

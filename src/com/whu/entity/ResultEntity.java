@@ -5,7 +5,7 @@ public class ResultEntity {
     private String[] path;
     private int size;
     private double[] similarity;
-    private Rank[] rank;
+    private ResultRank[] rank;
 
     public ResultEntity(int size) {
         path = new String[size];
@@ -19,7 +19,7 @@ public class ResultEntity {
      * @param left
      * @param right
      */
-    private void quicksort(Rank n[], int left, int right) {
+    private void quicksort(ResultRank n[], int left, int right) {
         int dp;
         if (left < right) {
             dp = partition(n, left, right);
@@ -35,8 +35,8 @@ public class ResultEntity {
      * @param right
      * @return
      */
-    private int partition(Rank n[], int left, int right) {
-        Rank pivot = n[left];
+    private int partition(ResultRank n[], int left, int right) {
+        ResultRank pivot = n[left];
         while (left < right) {
             while (left < right && n[right].getSimilarity() <= pivot.getSimilarity())
                 right--;
@@ -55,9 +55,9 @@ public class ResultEntity {
      * ÅÅÐò
      */
     public void sort() {
-        rank = new Rank[size];
+        rank = new ResultRank[size];
         for (int i = 0; i < size; i++) {
-            rank[i] = new Rank();
+            rank[i] = new ResultRank();
             rank[i].setTag(i + 1);
             rank[i].setSimilarity(similarity[i]);
         }
@@ -67,7 +67,7 @@ public class ResultEntity {
         System.out.println("Sort Completed!");
     }
 
-    public Rank[] getRank() {
+    public ResultRank[] getRank() {
         return rank;
     }
 

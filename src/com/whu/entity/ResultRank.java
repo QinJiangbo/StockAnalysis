@@ -1,6 +1,6 @@
 package com.whu.entity;
 
-public class Rank {
+public class ResultRank {
 	
 	private int tag; // 标记,标识它的位置
 	private double similarity; // 相似度
