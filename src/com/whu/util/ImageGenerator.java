@@ -19,6 +19,10 @@ public class ImageGenerator implements Runnable {
 
     private File file;
 
+    public ImageGenerator(File file) {
+        this.file = file;
+    }
+
     @Override
     public void run() {
         TextDataReader textDataReader = new TextDataReader();
@@ -48,11 +52,7 @@ public class ImageGenerator implements Runnable {
             e.printStackTrace();
         }
         KChart chart = new KChart(list, beginDate, endDate);
-        chart.savaAsPic(textDataReader.getKLineImagePath(), textDataReader.getDealNumberImagePath());
-    }
-
-    public ImageGenerator(File file) {
-        this.file = file;
+        chart.savaAsImage(textDataReader.getKLineImagePath(), textDataReader.getDealNumberImagePath());
     }
 
 }
