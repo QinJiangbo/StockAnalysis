@@ -66,7 +66,6 @@ public class KChartAction extends ActionSupport{
 
         // 算法及权重映射
         Map<Algorithms, Double> algorithms = new HashMap<>();
-        System.out.println("@pHash: " + pHashWeight);
         if (pHashWeight != 0.0) {
             algorithms.put(Algorithms.MULTIPHASH, pHashWeight);
         }

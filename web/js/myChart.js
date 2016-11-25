@@ -1,7 +1,7 @@
 $(function () {
     $(".numberInput").keyup(numberLimit);
     $("#selectFile").change(function () {
-        showImage($(this).val());
+        showImage($(this).val(), "KChartTarget", "amountTarget");
     });
 });
 
@@ -10,7 +10,6 @@ function numberLimit(event) {
     if (c.val() > 1 || c.val() < 0) {
         $(this).val(0);
     }
-
 }
 
 function handleFiles() {
@@ -43,15 +42,13 @@ function calculate() {
         kWeight: $("#k").val()
     };
 
-    console.log(params);
-
     $.ajax({
         type: "POST",
         url: "ajax/compare.ajax",
         data: params,
         dataType: "json",
         success: function (data) {
-            console.log(data);
+            showImage(data.targetNo, "KChartTarget2", "amountTarget2");
         },
         error: function (data) {
             console.log("data=" + data);
@@ -73,7 +70,7 @@ function loadImages() {
             $.each(json, function (index, item) {
                 $("#selectFile").append("\<option value=" + item + ">" + item + "</option>");
             })
-            showImage(json[0]);
+            showImage(json[0], "KChartTarget", "amountTarget");
             // 禁用掉button
             $("#inputFile").attr("disabled", true);
         },
@@ -87,7 +84,7 @@ function loadImages() {
  * 显示数据文件对应的图片
  * @param fileNo
  */
-function showImage(fileNo) {
-    $("#KChartTarget").find("img")[0].src = "data/image/" + fileNo + "-k.jpg";
-    $("#amountTarget").find("img")[0].src = "data/image/" + fileNo + "-v.jpg";
+function showImage(fileNo, kchartId, amountId) {
+    $("#" + kchartId).find("img")[0].src = "data/image/" + fileNo + "-k.jpg";
+    $("#" + amountId).find("img")[0].src = "data/image/" + fileNo + "-v.jpg";
 }
