@@ -33,4 +33,11 @@ public class SiftPHash extends KChartThread {
         this.path2 = path2;
     }
 
+    @Override
+    public double calSimilarity(String path1, String path2) {
+        path1 = path1.replace(ServerConstants.KCHART_IMAGES, ServerConstants.KCHART_COMPRESSED_IMAGES);
+        path2 = path2.replace(ServerConstants.KCHART_IMAGES, ServerConstants.KCHART_COMPRESSED_IMAGES);
+        return imagePHash.getSimilarity(path1, path2);
+    }
+
 }

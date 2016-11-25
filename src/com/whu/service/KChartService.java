@@ -3,9 +3,11 @@ package com.whu.service;
 import com.whu.algorithms.KChartThread;
 import com.whu.entity.ParamWeight;
 import com.whu.entity.ResultEntity;
+import com.whu.entity.ResultRank;
 import com.whu.util.*;
 
 import java.util.*;
+import java.util.concurrent.Executor;
 
 /**
  * Date: 20/11/2016
@@ -34,31 +36,34 @@ public class KChartService {
         }
 
         String[] imagePath = new String[size];
+
         // 结果实体
         ResultEntity resultEntity = new ResultEntity(size);
-        List<Thread> threadList = new ArrayList<>();
-        int groupNo = 1;
+        List<KChartThread> threadList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            Class clazz = algorithms.getClazz();
+            KChartThread thread = null;
+            try {
+                thread = (KChartThread) clazz.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            threadList.add(thread);
+        }
+
+        int tag = 1;
         for (String targetImage: imageNames) {
             if(!targetImage.equals(sourceImage)) {
                 String image0 = ServerConstants.KCHART_IMAGES + sourceImage + "-" + type.getName() + ".jpg";
                 String imageI = ServerConstants.KCHART_IMAGES + targetImage + "-" + type.getName() + ".jpg";
-                imagePath[groupNo-1] = targetImage.substring(0, targetImage.indexOf(".txt"));
-                try {
-                    Class clazz = algorithms.getClazz();
-                    KChartThread thread = (KChartThread) clazz.newInstance();
-                    threadList.add(thread);
-                    thread.start(groupNo++, resultEntity.getSimilarity(), image0, imageI);
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+                imagePath[tag - 1] = targetImage.substring(0, targetImage.indexOf(".txt"));
+                threadList.get(tag - 1).start(tag++, resultEntity.getSimilarity(), image0, imageI);
             }
         }
-        for (int i = 0; i < size - 1; ++i) {
+        resultEntity.setPath(imagePath);
+        for (int i = 0; i < size; i++) {
             while (threadList.get(i).isAlive()); // 直到这个线程结束
         }
-        resultEntity.setPath(imagePath);
         return resultEntity;
     }
 
@@ -68,17 +73,24 @@ public class KChartService {
      * @return
      */
     public static ResultEntity mixSimilarityComparation(String sourceImage, Algorithms algorithms) {
-        ResultEntity kResultEntity = compareSimilarity(sourceImage, CompareType.K, algorithms);
-        ResultEntity vResultEntity = compareSimilarity(sourceImage, CompareType.V, algorithms);
-        if(kResultEntity == null) {
+        ResultEntity kResultEntity = null;
+        if (ParamWeight.K_WEIGHT != 0.0) {
+            kResultEntity = compareSimilarity(sourceImage, CompareType.K, algorithms);
+        }
+        ResultEntity vResultEntity = null;
+        if ((1 - ParamWeight.K_WEIGHT) != 0.0) {
+            vResultEntity = compareSimilarity(sourceImage, CompareType.V, algorithms);
+        }
+        if (kResultEntity == null && vResultEntity == null) {
             return null;
         }
-        int size = kResultEntity.getSize();
+        int size = kResultEntity == null ? vResultEntity.getSize() : kResultEntity.getSize();
         ResultEntity resultEntity = new ResultEntity(size);
-        resultEntity.setPath(kResultEntity.getPath());
+        String[] path = kResultEntity == null ? vResultEntity.getPath() : kResultEntity.getPath();
+        resultEntity.setPath(path);
         double[] similarity = new double[size];
-        double[] kSimilarity = kResultEntity.getSimilarity();
-        double[] vSimilarity = vResultEntity.getSimilarity();
+        double[] kSimilarity = kResultEntity == null ? new double[size] : kResultEntity.getSimilarity();
+        double[] vSimilarity = vResultEntity == null ? new double[size] : vResultEntity.getSimilarity();
         for(int i = 0; i<size; i++) {
             similarity[i] = ParamWeight.K_WEIGHT * kSimilarity[i] + (1 - ParamWeight.K_WEIGHT) * vSimilarity[i];
         }
@@ -107,18 +119,50 @@ public class KChartService {
         ResultEntity resultEntity = new ResultEntity(size);
         resultEntity.setPath(resultEntities.get(0).getPath());
         double[] similarity = new double[size];
-        for (int i = 0; i < resultEntities.size(); i++) {
-            for (int j = 0; j < size; j++) {
+
+        // 对每一个图片,加上每个算法的权重
+        for (int j = 0; j < size; j++) {
+            for (int i = 0; i < resultEntities.size(); i++) {
                 similarity[j] += resultEntities.get(i).getSimilarity()[j] * weights.get(i);
             }
         }
+
         resultEntity.setSimilarity(similarity);
         return resultEntity;
     }
 
+    /**
+     * 计算两张图片之间的相似度
+     *
+     * @param image1
+     * @param image2
+     * @return
+     */
+    private static double calSimilarityIn(String image1, String image2, Algorithms algorithms) {
+
+        // 添加全路径
+        image1 = ServerConstants.KCHART_IMAGES + image1;
+        image2 = ServerConstants.KCHART_IMAGES + image2;
+
+        Class clazz = algorithms.getClazz();
+        KChartThread thread = null;
+        double similarity = 0.0;
+        try {
+            thread = (KChartThread) clazz.newInstance();
+            similarity = thread.calSimilarity(image1, image2);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return similarity;
+    }
+
     public static void main(String[] args) {
 //        long start = System.currentTimeMillis();
-//        ResultEntity resultEntity = mixSimilarityComparation("SZ300122.txt", Algorithms.MULTIPHASH);
+//        ParamWeight.K_WEIGHT = 1.0;
+//        ResultEntity resultEntity = mixSimilarityComparation("SZ300015.txt", Algorithms.SIFTPHASH);
+//        resultEntity.sort();
 //        if(resultEntity != null) {
 //            int tag = resultEntity.getRank()[0].getTag();
 //            System.out.println(resultEntity.getRank()[0].getSimilarity());
@@ -130,13 +174,24 @@ public class KChartService {
 //        }else{
 //            System.out.println("The source image name is wrong!");
 //        }
+//
         Map<Algorithms, Double> map = new HashMap<>();
         map.put(Algorithms.MULTIPHASH, 1.0);
-        ResultEntity resultEntity = multiMixSimilarityComparation("SZ300122.txt", map);
+        ParamWeight.K_WEIGHT = 1.0;
+        ResultEntity resultEntity = multiMixSimilarityComparation("SZ300015.txt", map);
         resultEntity.sort();
         int tag = resultEntity.getRank()[0].getTag();
+//        ResultRank[] resultRanks = resultEntity.getRank();
+//        int count = 1;
+//        for (ResultRank resultRank : resultRanks) {
+//            System.out.println(count++ + "@" + resultRank.getSimilarity() + "@" + resultEntity.getPath()[resultRank.getTag() - 1]);
+//        }
         System.out.println(resultEntity.getRank()[0].getSimilarity());
         System.out.println(tag - 1);
-        System.out.println(resultEntity.getPath()[tag-1]);
+        System.out.println(resultEntity.getPath()[tag - 1]);
+
+//        System.out.println("pHash@" + calSimilarityIn("SZ300015.txt-k.jpg", "SZ300097.txt-k.jpg", Algorithms.MULTIPHASH));
+//        System.out.println("sift@" + calSimilarityIn("SZ300015.txt-k.jpg", "SZ300097.txt-k.jpg", Algorithms.SIFTPHASH));
+//        System.out.println("leven@" + calSimilarityIn("SZ300015.txt-k.jpg", "SZ300097.txt-k.jpg", Algorithms.LEVENSHTEIN));
     }
 }

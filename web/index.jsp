@@ -39,7 +39,8 @@
            max="1">
 	<label class="fontColor">K线权重：</label>
     <input type="number" id="k" value="0.5" class="numberInput form-control margin-right" step="0.1" min="0" max="1">
-	<button type="button" onclick="calculate()" class="mybtn btn btn-default btn-sm margin-right">计算</button>
+    <button type="button" id="calBtn" onclick="calculate()" class="mybtn btn btn-default btn-sm margin-right">计算
+    </button>
 </div>
 <div class="compare">
 

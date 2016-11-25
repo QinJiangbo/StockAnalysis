@@ -13,4 +13,6 @@ public abstract class KChartThread extends Thread {
      * @param path2
      */
     public abstract void start(int tag, double[] similarity, String path1, String path2);
+
+    public abstract double calSimilarity(String path1, String path2);
 }

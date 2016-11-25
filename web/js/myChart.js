@@ -32,6 +32,7 @@ function calculate() {
         alert("三个算法权重之和不能大于1");
         return;
     }
+    $("#calBtn").attr("disabled", true);
 
     // 参数
     var params = {
@@ -42,6 +43,8 @@ function calculate() {
         kWeight: $("#k").val()
     };
 
+    console.log(params);
+
     $.ajax({
         type: "POST",
         url: "ajax/compare.ajax",
@@ -49,6 +52,7 @@ function calculate() {
         dataType: "json",
         success: function (data) {
             showImage(data.targetNo, "KChartTarget2", "amountTarget2");
+            $("#calBtn").attr("disabled", false);
         },
         error: function (data) {
             console.log("data=" + data);

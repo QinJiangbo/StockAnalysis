@@ -24,6 +24,13 @@ public class LevenShtein extends KChartThread {
         this.path2 = path2;
     }
 
+    @Override
+    public double calSimilarity(String path1, String path2) {
+        String img1HashCode = produceFingerPrint(path1);
+        String img2HashCode = produceFingerPrint(path2);
+        return HashCodeDiff.levenshtein(img1HashCode, img2HashCode);
+    }
+
     /**
      * 比较相似度
      */

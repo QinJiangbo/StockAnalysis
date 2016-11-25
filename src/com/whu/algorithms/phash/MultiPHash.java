@@ -8,10 +8,11 @@ public class MultiPHash extends KChartThread {
     int tag; // 比较的组别
     String path1 = "";
     String path2 = "";
+    private ImagePHash imagePHash = new ImagePHash();
 
     public void run() {
         if (path1 != "" && path2 != "") {
-            similarity[tag - 1] = new ImagePHash().getSimilarity(path1, path2);
+            similarity[tag - 1] = imagePHash.getSimilarity(path1, path2);
         }
     }
 
@@ -21,5 +22,10 @@ public class MultiPHash extends KChartThread {
         this.similarity = similarity;
         this.path1 = path1;
         this.path2 = path2;
+    }
+
+    @Override
+    public double calSimilarity(String path1, String path2) {
+        return imagePHash.getSimilarity(path1, path2);
     }
 }

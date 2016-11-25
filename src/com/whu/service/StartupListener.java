@@ -65,7 +65,7 @@ public class StartupListener implements ServletContextListener {
     }
 
     /**
-     * 修改静态常量
+     * 修改静态常量,对于基本类型无效
      * @param clazz
      * @param name
      * @param value

@@ -87,6 +87,7 @@ public class KChartAction extends ActionSupport{
         int tag = resultEntity.getRank()[0].getTag();
         System.out.println("similarity: " + resultEntity.getRank()[0].getSimilarity());
         targetNo = resultEntity.getPath()[tag - 1];
+        System.out.println("target image: " + targetNo);
         return SUCCESS;
     }
 
