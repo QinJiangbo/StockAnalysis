@@ -62,10 +62,10 @@ public class KChartService {
                 threadList.get(tag - 1).start(tag++, resultEntity.getSimilarity(), image0, imageI);
             }
         }
-        resultEntity.setPath(imagePath);
         for (int i = 0; i < size; i++) {
-            while (threadList.get(i).isAlive()); // 直到这个线程结束
+            while (threadList.get(i).isAlive()) ; // 直到这个线程结束
         }
+        resultEntity.setPath(imagePath);
         return resultEntity;
     }
 
@@ -183,11 +183,11 @@ public class KChartService {
         ResultEntity resultEntity = multiMixSimilarityComparation("SZ300015.txt", map);
         resultEntity.sort();
         int tag = resultEntity.getRank()[0].getTag();
-//        ResultRank[] resultRanks = resultEntity.getRank();
-//        int count = 1;
-//        for (ResultRank resultRank : resultRanks) {
-//            System.out.println(count++ + "@" + resultRank.getSimilarity() + "@" + resultEntity.getPath()[resultRank.getTag() - 1]);
-//        }
+        ResultRank[] resultRanks = resultEntity.getRank();
+        int count = 1;
+        for (ResultRank resultRank : resultRanks) {
+            System.out.println(count++ + "@" + resultRank.getSimilarity() + "@" + resultEntity.getPath()[resultRank.getTag() - 1]);
+        }
         System.out.println(resultEntity.getRank()[0].getSimilarity());
         System.out.println(tag - 1);
         System.out.println(resultEntity.getPath()[tag - 1]);
