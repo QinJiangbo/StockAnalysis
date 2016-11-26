@@ -17,11 +17,9 @@ public class SiftPHash extends KChartThread {
     private ImagePHash imagePHash = new ImagePHash();
 
     public void run() {
-        if (!path1.equals("") && !path2.equals("")) {
-            path1 = path1.replace(ServerConstants.KCHART_IMAGES, ServerConstants.KCHART_COMPRESSED_IMAGES);
-            path2 = path2.replace(ServerConstants.KCHART_IMAGES, ServerConstants.KCHART_COMPRESSED_IMAGES);
-            similarity[tag - 1] = imagePHash.getSimilarity(path1, path2);
-        }
+        path1 = path1.replace(ServerConstants.KCHART_IMAGES, ServerConstants.KCHART_COMPRESSED_IMAGES);
+        path2 = path2.replace(ServerConstants.KCHART_IMAGES, ServerConstants.KCHART_COMPRESSED_IMAGES);
+        similarity[tag - 1] = imagePHash.getSimilarity(path1, path2);
     }
 
     @Override

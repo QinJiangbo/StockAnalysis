@@ -147,7 +147,7 @@ public class KChartService {
 //        }
 //
         Map<Algorithms, Double> map = new HashMap<>();
-        map.put(Algorithms.MULTIPHASH, 1.0);
+        map.put(Algorithms.SIFTPHASH, 1.0);
         ParamWeight.K_WEIGHT = 1.0;
         ResultEntity resultEntity = multiMixSimilarityComparation("SZ300015.txt", map);
         resultEntity.sort();

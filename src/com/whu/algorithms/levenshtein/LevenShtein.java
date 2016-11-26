@@ -28,12 +28,10 @@ public class LevenShtein extends KChartThread {
      * 比较相似度
      */
     public void run() {
-        if (!path1.equals("") && !path2.equals("")) {
-            String img1HashCode = produceFingerPrint(path1);
-            String img2HashCode = produceFingerPrint(path2);
-            similarity[tag - 1] = HashCodeDiff.levenshtein(img1HashCode, img2HashCode);
-        }
-    }
+		String img1HashCode = produceFingerPrint(path1);
+		String img2HashCode = produceFingerPrint(path2);
+		similarity[tag - 1] = HashCodeDiff.levenshtein(img1HashCode, img2HashCode);
+	}
 
 	/**
 	 * 生成图片指纹
