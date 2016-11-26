@@ -17,25 +17,18 @@ public class LevenShtein extends KChartThread {
 
     public void start(int tag, double[] similarity, String path1, String path2)
     {
-        super.start();
         this.tag = tag;
         this.similarity = similarity;
         this.path1 = path1;
         this.path2 = path2;
-    }
-
-    @Override
-    public double calSimilarity(String path1, String path2) {
-        String img1HashCode = produceFingerPrint(path1);
-        String img2HashCode = produceFingerPrint(path2);
-        return HashCodeDiff.levenshtein(img1HashCode, img2HashCode);
+        super.start();
     }
 
     /**
      * 比较相似度
      */
     public void run() {
-        if (path1 != "" && path2 != "") {
+        if (!path1.equals("") && !path2.equals("")) {
             String img1HashCode = produceFingerPrint(path1);
             String img2HashCode = produceFingerPrint(path2);
             similarity[tag - 1] = HashCodeDiff.levenshtein(img1HashCode, img2HashCode);

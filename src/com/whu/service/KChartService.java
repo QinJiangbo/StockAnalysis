@@ -25,18 +25,14 @@ public class KChartService {
      */
     public static ResultEntity compareSimilarity(String sourceImage, CompareType type, Algorithms algorithms) {
         String[] imageNames = FileNameUtil.listImageNames();
-        int size = imageNames.length -1;
+
         // 判断用户输入的图片信息是否有效
-        boolean flag = false;
-        for (String name: imageNames) {
-            if(name.equals(sourceImage)) {
-                flag = true;
-            }
-        }
-        if(flag == false) {
+        List<String> nameList = Arrays.asList(imageNames);
+        if (!nameList.contains(sourceImage)) {
             return null;
         }
 
+        int size = imageNames.length - 1;
         String[] imagePath = new String[size];
 
         // 结果实体
@@ -133,33 +129,6 @@ public class KChartService {
         return resultEntity;
     }
 
-    /**
-     * 计算两张图片之间的相似度
-     *
-     * @param image1
-     * @param image2
-     * @return
-     */
-    private static double calSimilarityIn(String image1, String image2, Algorithms algorithms) {
-
-        // 添加全路径
-        image1 = ServerConstants.KCHART_IMAGES + image1;
-        image2 = ServerConstants.KCHART_IMAGES + image2;
-
-        Class clazz = algorithms.getClazz();
-        KChartThread thread = null;
-        double similarity = 0.0;
-        try {
-            thread = (KChartThread) clazz.newInstance();
-            similarity = thread.calSimilarity(image1, image2);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return similarity;
-    }
-
     public static void main(String[] args) {
 //        long start = System.currentTimeMillis();
 //        ParamWeight.K_WEIGHT = 1.0;
@@ -192,8 +161,5 @@ public class KChartService {
         System.out.println(tag - 1);
         System.out.println(resultEntity.getPath()[tag - 1]);
 
-//        System.out.println("pHash@" + calSimilarityIn("SZ300015.txt-k.jpg", "SZ300097.txt-k.jpg", Algorithms.MULTIPHASH));
-//        System.out.println("sift@" + calSimilarityIn("SZ300015.txt-k.jpg", "SZ300097.txt-k.jpg", Algorithms.SIFTPHASH));
-//        System.out.println("leven@" + calSimilarityIn("SZ300015.txt-k.jpg", "SZ300097.txt-k.jpg", Algorithms.LEVENSHTEIN));
     }
 }

@@ -11,21 +11,16 @@ public class MultiPHash extends KChartThread {
     private ImagePHash imagePHash = new ImagePHash();
 
     public void run() {
-        if (path1 != "" && path2 != "") {
+        if (!path1.equals("") && !path2.equals("")) {
             similarity[tag - 1] = imagePHash.getSimilarity(path1, path2);
         }
     }
 
     public void start(int tag, double[] similarity, String path1, String path2) {
-        super.start();
         this.tag = tag;
         this.similarity = similarity;
         this.path1 = path1;
         this.path2 = path2;
-    }
-
-    @Override
-    public double calSimilarity(String path1, String path2) {
-        return imagePHash.getSimilarity(path1, path2);
+        super.start();
     }
 }
