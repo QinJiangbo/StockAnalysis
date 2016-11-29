@@ -3,10 +3,10 @@ K-line graph analysis for the stock market.<br>
 This is a team work for the final project in this semester.
 
 ## author
-+ qinjiangbo1994@163.com
++ QinJiangbo
 + Tangmengdi
 + WuWenan
-+ Maozhijun
 + Lugefei
++ Maozhijun
 + LiMeng
 + Yangpiao
