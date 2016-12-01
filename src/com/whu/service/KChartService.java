@@ -7,9 +7,6 @@ import com.whu.entity.ResultRank;
 import com.whu.util.*;
 
 import java.util.*;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Date: 20/11/2016
@@ -70,7 +67,7 @@ public class KChartService {
      * @param sourceImage 源图片
      * @return
      */
-    public static ResultEntity mixSimilarityComparation(String sourceImage, Algorithms algorithms) {
+    public static ResultEntity mixSimilarityComparision(String sourceImage, Algorithms algorithms) {
         ResultEntity kResultEntity = null;
         if (ParamWeight.K_WEIGHT != 0.0) {
             kResultEntity = compareSimilarity(sourceImage, CompareType.K, algorithms);
@@ -103,13 +100,13 @@ public class KChartService {
      * @param map
      * @return
      */
-    public static ResultEntity multiMixSimilarityComparation(String sourceImage, Map<Algorithms, Double> map) {
+    public static ResultEntity multiMixSimilarityComparision(String sourceImage, Map<Algorithms, Double> map) {
         List<ResultEntity> resultEntities = new ArrayList<>();
         List<Double> weights = new ArrayList<>();
 
         Set<Map.Entry<Algorithms, Double>> entrySet = map.entrySet();
         for (Map.Entry<Algorithms, Double> entry : entrySet) {
-            resultEntities.add(mixSimilarityComparation(sourceImage, entry.getKey()));
+            resultEntities.add(mixSimilarityComparision(sourceImage, entry.getKey()));
             weights.add(entry.getValue());
         }
 
@@ -132,7 +129,7 @@ public class KChartService {
     public static void main(String[] args) {
 //        long start = System.currentTimeMillis();
 //        ParamWeight.K_WEIGHT = 1.0;
-//        ResultEntity resultEntity = mixSimilarityComparation("SZ300015.txt", Algorithms.SIFTPHASH);
+//        ResultEntity resultEntity = mixSimilarityComparision("SZ300015.txt", Algorithms.SIFTPHASH);
 //        resultEntity.sort();
 //        if(resultEntity != null) {
 //            int tag = resultEntity.getRank()[0].getTag();
@@ -147,9 +144,9 @@ public class KChartService {
 //        }
 //
         Map<Algorithms, Double> map = new HashMap<>();
-        map.put(Algorithms.SIFTPHASH, 1.0);
+        map.put(Algorithms.MULTIPHASH, 1.0);
         ParamWeight.K_WEIGHT = 1.0;
-        ResultEntity resultEntity = multiMixSimilarityComparation("SZ300015.txt", map);
+        ResultEntity resultEntity = multiMixSimilarityComparision("SZ300015.txt", map);
         resultEntity.sort();
         int tag = resultEntity.getRank()[0].getTag();
         ResultRank[] resultRanks = resultEntity.getRank();

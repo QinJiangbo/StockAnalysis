@@ -82,7 +82,7 @@ public class KChartAction extends ActionSupport{
         }
 
         // 计算
-        ResultEntity resultEntity = KChartService.multiMixSimilarityComparation(sourceNo + ".txt", algorithms);
+        ResultEntity resultEntity = KChartService.multiMixSimilarityComparision(sourceNo + ".txt", algorithms);
         resultEntity.sort(); // 排序
         int tag = resultEntity.getRank()[0].getTag();
         System.out.println("similarity: " + resultEntity.getRank()[0].getSimilarity());
