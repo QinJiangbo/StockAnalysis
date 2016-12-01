@@ -53,6 +53,7 @@ function calculate() {
         success: function (data) {
             showImage(data.targetNo, "KChartTarget2", "amountTarget2");
             $("#calBtn").attr("disabled", false);
+            console.log(data)
         },
         error: function (data) {
             console.log("data=" + data);

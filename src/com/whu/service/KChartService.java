@@ -95,7 +95,6 @@ public class KChartService {
 
     /**
      * 多个算法间取综合
-     *
      * @param sourceImage
      * @param map
      * @return
@@ -140,7 +139,6 @@ public class KChartService {
             System.out.println(count++ + "@" + resultRank.getSimilarity() + "@" + resultEntity.getPath()[resultRank.getTag() - 1]);
         }
         System.out.println(resultEntity.getRank()[0].getSimilarity());
-        System.out.println(tag - 1);
         System.out.println(resultEntity.getPath()[tag - 1]);
 
     }

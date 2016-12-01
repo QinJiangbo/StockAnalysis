@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whu.entity.ParamWeight;
 import com.whu.entity.ResultEntity;
+import com.whu.entity.ResultRank;
 import com.whu.service.KChartService;
 import com.whu.util.Algorithms;
 import com.whu.util.ImageUtil;
@@ -83,9 +84,7 @@ public class KChartAction extends ActionSupport{
         ResultEntity resultEntity = KChartService.multiMixSimilarityComparision(sourceNo + ".txt", algorithms);
         resultEntity.sort(); // 排序
         int tag = resultEntity.getRank()[0].getTag();
-        System.out.println("similarity: " + resultEntity.getRank()[0].getSimilarity());
         targetNo = resultEntity.getPath()[tag - 1];
-        System.out.println("target image: " + targetNo);
         return SUCCESS;
     }
 
@@ -141,11 +140,11 @@ public class KChartAction extends ActionSupport{
         this.siftWeight = siftWeight;
     }
 
-    public double getkWeight() {
+    public double getKWeight() {
         return kWeight;
     }
 
-    public void setkWeight(double kWeight) {
+    public void setKWeight(double kWeight) {
         this.kWeight = kWeight;
     }
 
