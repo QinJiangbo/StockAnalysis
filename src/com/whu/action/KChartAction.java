@@ -22,10 +22,10 @@ import java.util.Map;
 public class KChartAction extends ActionSupport{
 
     private String result;
-    private double pHashWeight;
+    private double hashWeight;
     private double levenWeight;
     private double siftWeight;
-    private double kWeight;
+    private double klineWeight;
     private String sourceNo;
     private String targetNo;
 
@@ -62,22 +62,28 @@ public class KChartAction extends ActionSupport{
      */
     public String compare() {
 
+        System.out.println(toString());
+
         // 算法及权重映射
         Map<Algorithms, Double> algorithms = new HashMap<>();
-        if (pHashWeight != 0.0) {
-            algorithms.put(Algorithms.MULTIPHASH, pHashWeight);
+        if (hashWeight != 0) {
+            algorithms.put(Algorithms.MULTIPHASH, hashWeight);
         }
-        if (levenWeight != 0.0) {
+        if (levenWeight != 0) {
             algorithms.put(Algorithms.LEVENSHTEIN, levenWeight);
         }
-        if (siftWeight != 0.0) {
+        if (siftWeight != 0) {
             algorithms.put(Algorithms.SIFTPHASH, siftWeight);
         }
 
+        System.out.println(algorithms);
+
         // 设置K线图权重
-        if (kWeight != 0.0) {
-            ParamWeight.K_WEIGHT = kWeight;
+        if (klineWeight != 0) {
+            ParamWeight.K_WEIGHT = klineWeight;
         }
+
+        System.out.println("klineWeight=" + klineWeight);
 
         // 计算
         ResultEntity resultEntity = KChartService.multiMixSimilarityComparision(sourceNo + ".txt", algorithms);
@@ -116,14 +122,6 @@ public class KChartAction extends ActionSupport{
         this.targetNo = targetNo;
     }
 
-    public double getPHashWeight() {
-        return pHashWeight;
-    }
-
-    public void setPHashWeight(double pHashWeight) {
-        this.pHashWeight = pHashWeight;
-    }
-
     public double getLevenWeight() {
         return levenWeight;
     }
@@ -140,13 +138,32 @@ public class KChartAction extends ActionSupport{
         this.siftWeight = siftWeight;
     }
 
-    public double getKWeight() {
-        return kWeight;
+    public double getHashWeight() {
+        return hashWeight;
     }
 
-    public void setKWeight(double kWeight) {
-        this.kWeight = kWeight;
+    public void setHashWeight(double hashWeight) {
+        this.hashWeight = hashWeight;
     }
 
+    public double getKlineWeight() {
+        return klineWeight;
+    }
 
+    public void setKlineWeight(double klineWeight) {
+        this.klineWeight = klineWeight;
+    }
+
+    @Override
+    public String toString() {
+        return "KChartAction{" +
+                "result='" + result + '\'' +
+                ", hashWeight=" + hashWeight +
+                ", levenWeight=" + levenWeight +
+                ", siftWeight=" + siftWeight +
+                ", klineWeight=" + klineWeight +
+                ", sourceNo='" + sourceNo + '\'' +
+                ", targetNo='" + targetNo + '\'' +
+                '}';
+    }
 }

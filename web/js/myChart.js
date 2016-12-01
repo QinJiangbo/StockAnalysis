@@ -37,13 +37,11 @@ function calculate() {
     // 参数
     var params = {
         sourceNo: $("#selectFile").val(),
-        pHashWeight: $("#pHash").val(),
+        hashWeight: $("#pHash").val(),
         levenWeight: $("#levenShtein").val(),
         siftWeight: $("#sift").val(),
-        kWeight: $("#k").val()
+        klineWeight: $("#k").val()
     };
-
-    console.log(params);
 
     $.ajax({
         type: "POST",
@@ -53,7 +51,6 @@ function calculate() {
         success: function (data) {
             showImage(data.targetNo, "KChartTarget2", "amountTarget2");
             $("#calBtn").attr("disabled", false);
-            console.log(data)
         },
         error: function (data) {
             console.log("data=" + data);
