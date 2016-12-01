@@ -127,22 +127,7 @@ public class KChartService {
     }
 
     public static void main(String[] args) {
-//        long start = System.currentTimeMillis();
-//        ParamWeight.K_WEIGHT = 1.0;
-//        ResultEntity resultEntity = mixSimilarityComparision("SZ300015.txt", Algorithms.SIFTPHASH);
-//        resultEntity.sort();
-//        if(resultEntity != null) {
-//            int tag = resultEntity.getRank()[0].getTag();
-//            System.out.println(resultEntity.getRank()[0].getSimilarity());
-//            System.out.println(tag-1);
-//            System.out.println(resultEntity.getPath()[tag-1]);
-//            long end = System.currentTimeMillis();
-//            System.out.println("Time Consumed: " + (end - start) / 1000 + "s");
-//            System.out.println("Comparision Completed!");
-//        }else{
-//            System.out.println("The source image name is wrong!");
-//        }
-//
+
         Map<Algorithms, Double> map = new HashMap<>();
         map.put(Algorithms.MULTIPHASH, 1.0);
         ParamWeight.K_WEIGHT = 1.0;
