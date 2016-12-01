@@ -148,8 +148,4 @@ public final class GaussTemplate {
 		}
 	}
 
-
-
-
-
 }
