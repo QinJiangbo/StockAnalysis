@@ -85,6 +85,7 @@ public class KChartAction extends ActionSupport{
         resultEntity.sort(); // 排序
         int tag = resultEntity.getRank()[0].getTag();
         targetNo = resultEntity.getPath()[tag - 1];
+        System.out.println(targetNo);
         return SUCCESS;
     }
 
