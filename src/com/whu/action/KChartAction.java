@@ -31,7 +31,6 @@ public class KChartAction extends ActionSupport{
 
     /**
      * 加载图片
-     *
      * @return
      */
     public String loadImages() {
@@ -59,7 +58,6 @@ public class KChartAction extends ActionSupport{
 
     /**
      * 比较各个算法
-     *
      * @return
      */
     public String compare() {
