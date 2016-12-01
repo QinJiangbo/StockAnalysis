@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whu.entity.ParamWeight;
 import com.whu.entity.ResultEntity;
-import com.whu.entity.ResultRank;
 import com.whu.service.KChartService;
 import com.whu.util.Algorithms;
 import com.whu.util.ImageUtil;
