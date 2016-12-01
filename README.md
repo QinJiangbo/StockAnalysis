@@ -4,9 +4,9 @@ This is a team work for the final project in this semester.
 
 ## Members
 + QinJiangbo
-+ Tangmengdi
 + WuWenan
++ Tangmengdi
 + Lugefei
-+ Maozhijun
 + LiMeng
++ Maozhijun
 + Yangpiao
