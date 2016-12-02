@@ -8,6 +8,7 @@ import com.whu.service.KChartService;
 import com.whu.util.Algorithms;
 import com.whu.util.ImageUtil;
 import com.whu.util.ServerConstants;
+import com.whu.util.StopWatch;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -71,8 +72,12 @@ public class KChartAction extends ActionSupport{
         }
 
         // 计算
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
         ResultEntity resultEntity = KChartService.multiMixSimilarityComparision(sourceNo + ".txt", algorithms);
         resultEntity.sort(); // 排序
+        int time = stopWatch.stop();
+        System.out.println("当前耗时: " + time + "s");
         int tag = resultEntity.getRank()[0].getTag();
         targetNo = resultEntity.getPath()[tag - 1];
         return SUCCESS;
