@@ -1,7 +1,7 @@
 $(function () {
     $(".numberInput").keyup(numberLimit);
     $("#selectFile").change(function () {
-        showImage($(this).val(), "KChartTarget", "amountTarget");
+        showImage($(this).val(), "kChartTarget", "amountTarget");
     });
 });
 
@@ -33,6 +33,7 @@ function calculate() {
         return;
     }
     $("#calBtn").attr("disabled", true);
+    $("#calBtn").text("计算中...");
 
     // 参数
     var params = {
@@ -49,8 +50,9 @@ function calculate() {
         data: params,
         dataType: "json",
         success: function (data) {
-            showImage(data.targetNo, "KChartTarget2", "amountTarget2");
+            showImage(data.targetNo, "kChartTarget2", "amountTarget2");
             $("#calBtn").attr("disabled", false);
+            $("#calBtn").text("计算");
         },
         error: function (data) {
             console.log("data=" + data);
@@ -72,7 +74,7 @@ function loadImages() {
             $.each(json, function (index, item) {
                 $("#selectFile").append("\<option value=" + item + ">" + item + "</option>");
             })
-            showImage(json[0], "KChartTarget", "amountTarget");
+            showImage(json[0], "kChartTarget", "amountTarget");
             // 禁用掉button
             $("#inputFile").attr("disabled", true);
         },

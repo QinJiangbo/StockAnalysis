@@ -64,7 +64,6 @@ public class ResultEntity {
         //ÅÅĞòËã·¨
         //¿ìÅÅ;
         quicksort(rank, 0, size - 1);
-        System.out.println("Sort Completed!");
     }
 
     public ResultRank[] getRank() {

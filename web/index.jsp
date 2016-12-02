@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="selectFileDiv">
-    <button id="inputFile" class="import-btn btn btn-default" onclick="loadImages()">导入数据集</button>
+    <button id="inputFile" class="import-btn btn btn-success" onclick="loadImages()">导入数据集</button>
 	<div class="dropdown inline">
 		<select id="selectFile" class="form-control selectFile" name="selectFile">
             <!-- 这里是所有的数据集合列表 -->
@@ -20,7 +20,7 @@
 	</div>
 </div>
 <div class="target">
-	<div class="displayChart inline" id="KChartTarget">
+    <div class="displayChart inline" id="kChartTarget">
         <img src="" alt="K线图" width="100%" height="100%">
 	</div>
 	<div class="displayChart inline" id="amountTarget">
@@ -38,13 +38,13 @@
     <input type="number" id="sift" value="0" class="arith3 numberInput form-control margin-right" step="0.1" min="0"
            max="1">
 	<label class="fontColor">K线权重：</label>
-    <input type="number" id="k" value="0.5" class="numberInput form-control margin-right" step="0.1" min="0" max="1">
-    <button type="button" id="calBtn" onclick="calculate()" class="mybtn btn btn-default btn-sm margin-right">计算
+    <input type="number" id="k" value="1" class="numberInput form-control margin-right" step="0.1" min="0" max="1">
+    <button type="button" id="calBtn" onclick="calculate()" class="mybtn btn btn-success btn-sm margin-right">计算
     </button>
 </div>
 <div class="compare">
 
-	<div class="displayChart inline" id="KChartTarget2">
+    <div class="displayChart inline" id="kChartTarget2">
         <img src="" alt="K线图" width="100%" height="100%">
     </div>
 	<div class="displayChart inline" id="amountTarget2">

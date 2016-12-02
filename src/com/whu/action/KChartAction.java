@@ -53,8 +53,6 @@ public class KChartAction extends ActionSupport{
      */
     public String compare() {
 
-        System.out.println(toString());
-
         // 算法及权重映射
         Map<Algorithms, Double> algorithms = new HashMap<>();
         if (hashWeight != 0) {
@@ -67,21 +65,16 @@ public class KChartAction extends ActionSupport{
             algorithms.put(Algorithms.SIFTPHASH, siftWeight);
         }
 
-        System.out.println(algorithms);
-
         // 设置K线图权重
         if (klineWeight != 0) {
             ParamWeight.K_WEIGHT = klineWeight;
         }
-
-        System.out.println("klineWeight=" + klineWeight);
 
         // 计算
         ResultEntity resultEntity = KChartService.multiMixSimilarityComparision(sourceNo + ".txt", algorithms);
         resultEntity.sort(); // 排序
         int tag = resultEntity.getRank()[0].getTag();
         targetNo = resultEntity.getPath()[tag - 1];
-        System.out.println(targetNo);
         return SUCCESS;
     }
 
@@ -145,16 +138,4 @@ public class KChartAction extends ActionSupport{
         this.klineWeight = klineWeight;
     }
 
-    @Override
-    public String toString() {
-        return "KChartAction{" +
-                "result='" + result + '\'' +
-                ", hashWeight=" + hashWeight +
-                ", levenWeight=" + levenWeight +
-                ", siftWeight=" + siftWeight +
-                ", klineWeight=" + klineWeight +
-                ", sourceNo='" + sourceNo + '\'' +
-                ", targetNo='" + targetNo + '\'' +
-                '}';
-    }
 }
