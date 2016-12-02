@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/com/whu/action/KChartAction.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/levenshtein/HashCodeDiff.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/levenshtein/ImageRead.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/whu/algorithms/levenshtein/LevenShtein.java" charset="GBK" />

@@ -79,7 +79,7 @@ public class KChartAction extends ActionSupport{
         resultEntity.sort(); // 排序
         // 打印时间
         int time = stopWatch.stop();
-        System.out.println("当前耗时: " + time + "s");
+        System.out.println("Time: " + time + "s");
         // 输出结果
         int tag = resultEntity.getRank()[0].getTag();
         targetNo = resultEntity.getPath()[tag - 1];
