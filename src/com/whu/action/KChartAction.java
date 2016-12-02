@@ -34,16 +34,7 @@ public class KChartAction extends ActionSupport{
      * @return
      */
     public String loadImages() {
-        File imageDir = new File(ServerConstants.KCHART_IMAGES);
-        File compressDir = new File(ServerConstants.KCHART_COMPRESSED_IMAGES);
-        if (imageDir.listFiles() == null) {
-            // 启动生成图片过程
-            ImageUtil.generate();
-        }
-        if (compressDir.listFiles() == null) {
-            // 启动压缩图片过程
-            ImageUtil.compress();
-        }
+
         // 获取所有的文件名
         File[] files = new File(ServerConstants.STOCK_DATA).listFiles();
         List<String> fileNames = new ArrayList<>();

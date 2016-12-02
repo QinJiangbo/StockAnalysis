@@ -1,10 +1,12 @@
 package com.whu.service;
 
+import com.whu.util.ImageUtil;
 import com.whu.util.ServerConstants;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -53,6 +55,18 @@ public class StartupListener implements ServletContextListener {
         if (KCHART_COMPRESSED_IMAGES != null && !KCHART_COMPRESSED_IMAGES.equals("")) {
             ServerConstants.KCHART_COMPRESSED_IMAGES = KCHART_COMPRESSED_IMAGES;
         }
+
+        File imageDir = new File(ServerConstants.KCHART_IMAGES);
+        File compressDir = new File(ServerConstants.KCHART_COMPRESSED_IMAGES);
+        if (imageDir.listFiles().length == 0) {
+            // 启动生成图片过程
+            ImageUtil.generate();
+        }
+        if (compressDir.listFiles().length == 0) {
+            // 启动压缩图片过程
+            ImageUtil.compress();
+        }
+        System.out.println("Images initialized completed!");
     }
 
     /**

@@ -209,8 +209,8 @@ public class KChart {
         JFreeChart kChart = new JFreeChart(null, JFreeChart.DEFAULT_TITLE_FONT, drawKLineChart(), false);
         JFreeChart vChart = new JFreeChart(null, JFreeChart.DEFAULT_TITLE_FONT, drawDealNumberChart(), false);
         try {
-            ChartUtilities.saveChartAsJPEG(new File(kPath), kChart, 600, 480);
-            ChartUtilities.saveChartAsJPEG(new File(vPath), vChart, 600, 480);
+            ChartUtilities.saveChartAsJPEG(new File(kPath), kChart, 620, 250);
+            ChartUtilities.saveChartAsJPEG(new File(vPath), vChart, 620, 250);
             return true;
         } catch (IOException e) {
             return false;
