@@ -31,7 +31,6 @@ public class EhCacheUtil {
 
     /**
      * 获取单例
-     *
      * @return
      */
     public static EhCacheUtil getInstance() {
@@ -43,7 +42,6 @@ public class EhCacheUtil {
 
     /**
      * 存入缓存
-     *
      * @param key
      * @param value
      */
@@ -54,7 +52,6 @@ public class EhCacheUtil {
 
     /**
      * 查询缓存
-     *
      * @param key
      * @return
      */
@@ -65,7 +62,6 @@ public class EhCacheUtil {
 
     /**
      * 移除缓存
-     *
      * @param key
      */
     public void remove(String key) {
@@ -75,7 +71,6 @@ public class EhCacheUtil {
 
     /**
      * 销毁缓存
-     *
      * @return
      */
     public void disposeCache() {
