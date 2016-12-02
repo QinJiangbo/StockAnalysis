@@ -71,13 +71,16 @@ public class KChartAction extends ActionSupport{
             ParamWeight.K_WEIGHT = klineWeight;
         }
 
-        // 计算
+        // 计时
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
+        // 计算
         ResultEntity resultEntity = KChartService.multiMixSimilarityComparision(sourceNo + ".txt", algorithms);
         resultEntity.sort(); // 排序
+        // 打印时间
         int time = stopWatch.stop();
         System.out.println("当前耗时: " + time + "s");
+        // 输出结果
         int tag = resultEntity.getRank()[0].getTag();
         targetNo = resultEntity.getPath()[tag - 1];
         return SUCCESS;
