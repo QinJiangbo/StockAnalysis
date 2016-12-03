@@ -12,10 +12,7 @@ import com.whu.util.ServerConstants;
 import com.whu.util.StopWatch;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Date: 20/11/2016
@@ -56,23 +53,43 @@ public class KChartAction extends ActionSupport{
 
         // 算法及权重映射
         Map<Algorithms, Double> algorithms = new HashMap<>();
+        String algsName = ""; // 确定参与本次计算算法的名称
         if (hashWeight != 0) {
             algorithms.put(Algorithms.MULTIPHASH, hashWeight);
+            algsName = Algorithms.MULTIPHASH.name();
         }
         if (levenWeight != 0) {
             algorithms.put(Algorithms.LEVENSHTEIN, levenWeight);
+            algsName = Algorithms.LEVENSHTEIN.name();
         }
         if (siftWeight != 0) {
             algorithms.put(Algorithms.SIFTPHASH, siftWeight);
+            algsName = Algorithms.SIFTPHASH.name();
         }
 
         // 设置K线图权重
-        if (klineWeight != 0) {
-            ParamWeight.K_WEIGHT = klineWeight;
+        ParamWeight.K_WEIGHT = klineWeight != 0 ? klineWeight : 0;
+
+        // 如果是三个算法混合计算就不加入缓存，没意义
+        Set<Map.Entry<Algorithms, Double>> entrySet = algorithms.entrySet();
+        if(entrySet.size() > 1) {
+            // 计算
+            ResultEntity resultEntity = KChartService.multiMixSimilarityComparision(sourceNo + ".txt", algorithms);
+            resultEntity.sort(); // 排序
+            // 输出结果
+            ResultRank[] resultRanks = resultEntity.getRank();
+            // 存入缓存
+            StringBuffer stringBuffer = new StringBuffer();
+            for(ResultRank resultRank : resultRanks) {
+                stringBuffer.append(resultEntity.getPath()[resultRank.getTag()-1] + ",");
+            }
+            result = stringBuffer.toString();
+            result = result.substring(0, result.length() - 1);
+            return SUCCESS;
         }
 
         // 从缓存中取结果
-        String cacheKey = ParamWeight.K_WEIGHT > 0 ? sourceNo + "-k" : sourceNo + "-v";
+        String cacheKey = ParamWeight.K_WEIGHT > 0 ? algsName + "-" + sourceNo + "-k" : algsName + "-" + sourceNo + "-v";
         String value = EhCacheUtil.getInstance().get(cacheKey);
         if(value == null) {
             // 计时

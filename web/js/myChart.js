@@ -85,6 +85,7 @@ function loadImages() {
             showImage(json[0], "kChartTarget", "amountTarget");
             // 禁用掉button
             $("#inputFile").attr("disabled", true);
+            $("#inputFile").text("导入完毕");
         },
         error: function (data) {
             console.log("data=" + data);
