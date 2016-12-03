@@ -50,7 +50,13 @@ function calculate() {
         data: params,
         dataType: "json",
         success: function (data) {
-            showImage(data.targetNo, "kChartTarget2", "amountTarget2");
+            var result = data.result;
+            var array = result.split(",");
+            /* 写入sessionStorage */
+            sessionStorage.setItem("array", JSON.stringify(array));
+            sessionStorage.setItem("current", 0);
+            $("#prevBtn").attr("disabled", true);
+            showImage(array[0], "kChartTarget2", "amountTarget2");
             $("#calBtn").attr("disabled", false);
             $("#calBtn").text("计算");
         },
@@ -91,4 +97,37 @@ function loadImages() {
 function showImage(fileNo, kchartId, amountId) {
     $("#" + kchartId).find("img")[0].src = "data/image/" + fileNo + "-k.jpg";
     $("#" + amountId).find("img")[0].src = "data/image/" + fileNo + "-v.jpg";
+}
+
+/**
+ * 显示上一张图片
+ */
+function prev() {
+    var current = Number(sessionStorage.getItem("current"));
+    var array = JSON.parse(sessionStorage.getItem("array"));
+    var fileNo = array[current - 1];
+    $("#imageNo").text(fileNo);
+    showImage(fileNo, "kChartTarget2", "amountTarget2");
+    sessionStorage.setItem("current", (current - 1));
+    $("#nextBtn").attr("disabled", false);
+    if((current - 1) == 0) {
+        $("#prevBtn").attr("disabled", true);
+    }
+}
+
+/**
+ * 显示下一张图片
+ */
+function next() {
+    var current = Number(sessionStorage.getItem("current"));
+    var array = JSON.parse(sessionStorage.getItem("array"));
+    console.log(array[1]);
+    var fileNo = array[current + 1];
+    $("#imageNo").text(fileNo);
+    showImage(fileNo, "kChartTarget2", "amountTarget2");
+    sessionStorage.setItem("current", (current + 1));
+    $("#prevBtn").attr("disabled", false);
+    if((current + 1) == (array.length - 1)) {
+        $("#nextBtn").attr("disabled", true);
+    }
 }

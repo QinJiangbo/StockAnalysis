@@ -39,8 +39,10 @@
            max="1">
 	<label class="fontColor">K线权重：</label>
     <input type="number" id="k" value="1" class="numberInput form-control margin-right" step="0.1" min="0" max="1">
-    <button type="button" id="calBtn" onclick="calculate()" class="mybtn btn btn-success btn-sm margin-right">计算
-    </button>
+    <button type="button" id="calBtn" onclick="calculate()" class="mybtn btn btn-success btn-sm margin-right">计算</button>
+    <button type="button" id="prevBtn" onclick="prev()" class="btn-slide-left btn btn-success btn-sm margin-right">&lt;</button>
+    <label class="fontColor" id="imageNo">SZ300000</label>
+    <button type="button" id="nextBtn" onclick="next()" class="btn-slide-right btn btn-success btn-sm margin-right">&gt;</button>
 </div>
 <div class="compare">
 

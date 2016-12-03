@@ -23,6 +23,10 @@ public class ImageAction extends ActionSupport{
      * @return
      */
     public String image() {
+        if (name.equals("undefined") || name.equals("")) {
+            imageStream = null;
+            return SUCCESS;
+        }
         String imagePath = ServerConstants.KCHART_IMAGES + name + ".txt-" + type + ".jpg";
         File file = new File(imagePath);
         try {

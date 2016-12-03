@@ -138,7 +138,7 @@ option:hover {
 .selectButton {
     position: absolute;
     top: 300px;
-    width: 1100px;
+    width: 1200px;
     height: 200px;
     left: 10px;
 }
@@ -164,6 +164,20 @@ option:hover {
     height: 30px;
     width: 70px;
     text-align: center;
+}
+
+.btn-slide-left,
+.btn-slide-right {
+    height: 30px;
+    text-align: center;
+}
+
+.btn-slide-left {
+    margin-right: 30px;
+}
+
+.btn-slide-right {
+    margin-left: 30px;
 }
 
 .import-btn {

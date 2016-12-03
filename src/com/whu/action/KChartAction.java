@@ -4,9 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whu.entity.ParamWeight;
 import com.whu.entity.ResultEntity;
+import com.whu.entity.ResultRank;
 import com.whu.service.KChartService;
 import com.whu.util.Algorithms;
-import com.whu.util.ImageUtil;
+import com.whu.util.EhCacheUtil;
 import com.whu.util.ServerConstants;
 import com.whu.util.StopWatch;
 
@@ -28,7 +29,6 @@ public class KChartAction extends ActionSupport{
     private double siftWeight;
     private double klineWeight;
     private String sourceNo;
-    private String targetNo;
 
     /**
      * 加载图片
@@ -71,21 +71,36 @@ public class KChartAction extends ActionSupport{
             ParamWeight.K_WEIGHT = klineWeight;
         }
 
-        // 计时
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-        // 计算
-        ResultEntity resultEntity = KChartService.multiMixSimilarityComparision(sourceNo + ".txt", algorithms);
-        resultEntity.sort(); // 排序
-        // 打印时间
-        int time = stopWatch.stop();
-        System.out.println("Time: " + time + "s");
-        // 输出结果
-        int tag = resultEntity.getRank()[0].getTag();
-        targetNo = resultEntity.getPath()[tag - 1];
+        // 从缓存中取结果
+        String cacheKey = ParamWeight.K_WEIGHT > 0 ? sourceNo + "-k" : sourceNo + "-v";
+        String value = EhCacheUtil.getInstance().get(cacheKey);
+        if(value == null) {
+            // 计时
+            StopWatch stopWatch = new StopWatch();
+            stopWatch.start();
+            // 计算
+            ResultEntity resultEntity = KChartService.multiMixSimilarityComparision(sourceNo + ".txt", algorithms);
+            resultEntity.sort(); // 排序
+            // 打印时间
+            int time = stopWatch.stop();
+            System.out.println("Time: " + time + "s");
+            // 输出结果
+            ResultRank[] resultRanks = resultEntity.getRank();
+            // 存入缓存
+            StringBuffer stringBuffer = new StringBuffer();
+            for(ResultRank resultRank : resultRanks) {
+                stringBuffer.append(resultEntity.getPath()[resultRank.getTag()-1] + ",");
+            }
+            String cacheValue = stringBuffer.toString();
+            cacheValue = cacheValue.substring(0, cacheValue.length() - 1);
+            EhCacheUtil.getInstance().put(cacheKey, cacheValue);
+            result = cacheValue;
+        }
+        else{
+            result = value;
+        }
         return SUCCESS;
     }
-
 
     /**
      * Getter和Setter方法
@@ -104,14 +119,6 @@ public class KChartAction extends ActionSupport{
 
     public void setSourceNo(String sourceNo) {
         this.sourceNo = sourceNo;
-    }
-
-    public String getTargetNo() {
-        return targetNo;
-    }
-
-    public void setTargetNo(String targetNo) {
-        this.targetNo = targetNo;
     }
 
     public double getLevenWeight() {

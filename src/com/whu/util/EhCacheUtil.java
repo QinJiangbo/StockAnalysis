@@ -23,7 +23,7 @@ public class EhCacheUtil {
     private EhCacheUtil() {
         cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
                 .withCache("myCache", CacheConfigurationBuilder
-                        .newCacheConfigurationBuilder(String.class, List.class, ResourcePoolsBuilder.heap(10)))
+                        .newCacheConfigurationBuilder(String.class, String.class, ResourcePoolsBuilder.heap(10)))
                 .build();
         cacheManager.init();
     }
@@ -44,8 +44,8 @@ public class EhCacheUtil {
      * @param key
      * @param value
      */
-    public void put(String key, List<String> value) {
-        Cache<String, List> myCache = cacheManager.getCache("myCache", String.class, List.class);
+    public void put(String key, String value) {
+        Cache<String, String> myCache = cacheManager.getCache("myCache", String.class, String.class);
         myCache.put(key, value);
     }
 
@@ -54,8 +54,8 @@ public class EhCacheUtil {
      * @param key
      * @return
      */
-    public List<String> get(String key) {
-        Cache<String, List> myCache = cacheManager.getCache("myCache", String.class, List.class);
+    public String get(String key) {
+        Cache<String, String> myCache = cacheManager.getCache("myCache", String.class, String.class);
         return myCache.get(key);
     }
 
