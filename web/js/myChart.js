@@ -56,6 +56,7 @@ function calculate() {
             sessionStorage.setItem("array", JSON.stringify(array));
             sessionStorage.setItem("current", 0);
             $("#prevBtn").attr("disabled", true);
+            $("#imageNo").text(array[0]);
             showImage(array[0], "kChartTarget2", "amountTarget2");
             $("#calBtn").attr("disabled", false);
             $("#calBtn").text("计算");
