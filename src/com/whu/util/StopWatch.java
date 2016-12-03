@@ -19,10 +19,9 @@ public class StopWatch {
      * 计算时间
      * @return
      */
-    public int stop() {
+    public double stop() {
         long end = System.currentTimeMillis();
-        int time = (int) (end - start) / 1000;
-        return time;
+        return (double) (end - start) / 1000;
     }
 
     /**

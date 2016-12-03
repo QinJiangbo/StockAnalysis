@@ -82,7 +82,7 @@ public class KChartAction extends ActionSupport{
             ResultEntity resultEntity = KChartService.multiMixSimilarityComparision(sourceNo + ".txt", algorithms);
             resultEntity.sort(); // 排序
             // 打印时间
-            int time = stopWatch.stop();
+            double time = stopWatch.stop();
             System.out.println("Time: " + time + "s");
             // 输出结果
             ResultRank[] resultRanks = resultEntity.getRank();
