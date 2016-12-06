@@ -39,7 +39,7 @@ public class ImageGenerator implements Runnable {
         String beginDate = "0000-00-00";
         String endDate = "0000-00-00";
         SimpleDateFormat sf1 = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sf2 = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat sf2 = new SimpleDateFormat(ServerConstants.DATE_FORMAT);
         try {
             beginDate = sf1.format(sf2.parse(textDataReader.getIssueDate()[0]));
             Date tempDate = sf2.parse(textDataReader.getIssueDate()[list_size - 1]);

@@ -1,5 +1,7 @@
 package com.whu.kchart;
 
+import com.whu.util.ServerConstants;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,7 +29,7 @@ public class KData {
 
     public KData(String stockName, String issueDate, double openPrice, double highPrice, double lowPrice, double closePrice, double dealNumber, double dealValue) {
         this.stockName = stockName;
-        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat sf = new SimpleDateFormat(ServerConstants.DATE_FORMAT);
         try {
             this.issueDate = sf.parse(issueDate);
         } catch (ParseException e) {
