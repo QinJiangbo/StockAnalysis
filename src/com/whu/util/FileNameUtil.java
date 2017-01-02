@@ -22,5 +22,19 @@ public class FileNameUtil {
         return fileNames;
     }
 
+    /**
+     * 重命名文件
+     */
+    public static void renameFileNames() {
+        File f = new File(ServerConstants.STOCK_DATA);
+        File[] list = f.listFiles();
+        for (File file : list) {
+            String fileName = file.getName();
+            String newName = fileName.replace("#","");
+            File newFile = new File(ServerConstants.STOCK_DATA + newName);
+            file.renameTo(newFile);
+            System.out.println(fileName + "==>" + newName);
+        }
+    }
 
 }
