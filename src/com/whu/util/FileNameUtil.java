@@ -24,14 +24,15 @@ public class FileNameUtil {
 
     /**
      * 重命名文件
+     * @param dir 目录
      */
-    public static void renameFileNames() {
-        File f = new File(ServerConstants.STOCK_DATA);
+    public static void renameFileNames(String dir) {
+        File f = new File(dir);
         File[] list = f.listFiles();
         for (File file : list) {
             String fileName = file.getName();
             String newName = fileName.replace("#","");
-            File newFile = new File(ServerConstants.STOCK_DATA + newName);
+            File newFile = new File(dir + newName);
             file.renameTo(newFile);
             System.out.println(fileName + "==>" + newName);
         }
