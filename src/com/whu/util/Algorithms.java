@@ -13,17 +13,17 @@ public enum Algorithms {
     SIFTPHASH(SiftPHash.class), // Sift算法
     LEVENSHTEIN(LevenShtein.class); // Leven Shtein算法
 
+    private Class clazz;
+
+    Algorithms(Class clazz) {
+        this.clazz = clazz;
+    }
+
     public Class getClazz() {
         return clazz;
     }
 
     public void setClazz(Class clazz) {
-        this.clazz = clazz;
-    }
-
-    private Class clazz;
-
-    private Algorithms(Class clazz) {
         this.clazz = clazz;
     }
 
