@@ -45,6 +45,7 @@ public class StartupListener implements ServletContextListener {
         String STOCK_DATA = properties.getProperty("STOCK_DATA");
         String KCHART_IMAGES = properties.getProperty("KCHART_IMAGES");
         String KCHART_COMPRESSED_IMAGES = properties.getProperty("KCHART_COMPRESSED_IMAGES");
+        String DATE_FORMAT = properties.getProperty("DATE_FORMAT");
         // 设置服务器属性值
         if (STOCK_DATA != null && !STOCK_DATA.equals("")) {
             ServerConstants.STOCK_DATA = STOCK_DATA;
@@ -54,6 +55,9 @@ public class StartupListener implements ServletContextListener {
         }
         if (KCHART_COMPRESSED_IMAGES != null && !KCHART_COMPRESSED_IMAGES.equals("")) {
             ServerConstants.KCHART_COMPRESSED_IMAGES = KCHART_COMPRESSED_IMAGES;
+        }
+        if (DATE_FORMAT != null && !DATE_FORMAT.equals("")) {
+            ServerConstants.DATE_FORMAT = DATE_FORMAT;
         }
 
         File imageDir = new File(ServerConstants.KCHART_IMAGES);

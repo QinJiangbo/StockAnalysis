@@ -4,6 +4,10 @@ import java.io.File;
 
 public class FileNameUtil {
 
+    /**
+     * 列出所有的图片名称
+     * @return
+     */
     public static String[] listImageNames() {
         File f = new File(ServerConstants.STOCK_DATA);
         File[] list = f.listFiles();
@@ -17,4 +21,6 @@ public class FileNameUtil {
         }
         return fileNames;
     }
+
+
 }
