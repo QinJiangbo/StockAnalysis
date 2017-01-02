@@ -11,7 +11,15 @@ public class FileNameUtil {
     public static String[] listImageNames() {
         File f = new File(ServerConstants.STOCK_DATA);
         File[] list = f.listFiles();
-        String[] fileNames = new String[list.length];
+        int size = list.length;
+        // solve the problem in macOS system
+        for (File file : list) {
+            if(file.getName().equals(".DS_Store")) {
+                file.delete();
+                size--;
+            }
+        }
+        String[] fileNames = new String[size];
         int tag = 0;
         for (File file : list) {
             if (file.getName().toLowerCase().endsWith(".txt")) {
