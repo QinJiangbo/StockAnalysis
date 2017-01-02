@@ -62,11 +62,11 @@ public class StartupListener implements ServletContextListener {
 
         File imageDir = new File(ServerConstants.KCHART_IMAGES);
         File compressDir = new File(ServerConstants.KCHART_COMPRESSED_IMAGES);
-        if (imageDir.listFiles().length == 0) {
+        if (imageDir.listFiles().length <= 1) {
             // 启动生成图片过程
             ImageUtil.generate();
         }
-        if (compressDir.listFiles().length == 0) {
+        if (compressDir.listFiles().length <= 1) {
             // 启动压缩图片过程
             ImageUtil.compress();
         }

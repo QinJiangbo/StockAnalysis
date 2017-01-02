@@ -21,6 +21,7 @@ public class KChartService {
      * @return 最相似图片
      */
     public static ResultEntity compareSimilarity(String sourceImage, CompareType type, Algorithms algorithms) {
+
         String[] imageNames = FileNameUtil.listImageNames();
 
         // 判断用户输入的图片信息是否有效
@@ -128,9 +129,9 @@ public class KChartService {
     public static void main(String[] args) {
 
         Map<Algorithms, Double> map = new HashMap<>();
-        map.put(Algorithms.SIFTPHASH, 1.0);
+        map.put(Algorithms.MULTIPHASH, 1.0);
         ParamWeight.K_WEIGHT = 0.5;
-        ResultEntity resultEntity = multiMixSimilarityComparision("SZ300015.txt", map);
+        ResultEntity resultEntity = multiMixSimilarityComparision("SH600012.txt", map);
         resultEntity.sort();
         int tag = resultEntity.getRank()[0].getTag();
         ResultRank[] resultRanks = resultEntity.getRank();
