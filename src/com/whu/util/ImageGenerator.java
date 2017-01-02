@@ -51,8 +51,13 @@ public class ImageGenerator implements Runnable {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        KChart chart = new KChart(list, beginDate, endDate);
-        chart.savaAsImage(textDataReader.getKLineImagePath(), textDataReader.getDealNumberImagePath());
+        if (!beginDate.equals("0000-00-00") && !endDate.equals("0000-00-00")) {
+            KChart chart = new KChart(list, beginDate, endDate);
+            chart.savaAsImage(textDataReader.getKLineImagePath(), textDataReader.getDealNumberImagePath());
+        }else{
+            System.out.println("imported data error ==> " + file.getName());
+        }
+
     }
 
 }
