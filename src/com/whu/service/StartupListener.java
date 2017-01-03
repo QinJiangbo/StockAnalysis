@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -62,9 +64,13 @@ public class StartupListener implements ServletContextListener {
 
         File imageDir = new File(ServerConstants.KCHART_IMAGES);
         File compressDir = new File(ServerConstants.KCHART_COMPRESSED_IMAGES);
+        List<Thread> threadList = new LinkedList<>();
         if (imageDir.listFiles().length <= 1) {
             // 启动生成图片过程
-            ImageUtil.generate();
+            threadList = ImageUtil.generate();
+        }
+        for (Thread thread : threadList) {
+            while (thread.isAlive());
         }
         if (compressDir.listFiles().length <= 1) {
             // 启动压缩图片过程
